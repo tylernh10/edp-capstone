@@ -46,11 +46,17 @@ def get_password(num_chars):
 # Generate random data for users and employees
 # job_roles and work_locations are in sorted ascending order based on seniority and location COL
 # Therefore, we can generate "realistic" salary data corresponding to these factors
+
 def generate_data():
     users, employees = [], []
+    prev_employees = None
     for i, num_employees in enumerate(EMPLOYEE_NUMS):
+        # The current job title
         job_role = job_roles[i]
-        for _ in range(num_employees):
+        
+        # Used so that we can assign direct reports to employees
+        employees_in_current_job_role = []
+        for j in range(num_employees):
             first, last = names.get_first_name(), names.get_last_name()
             phone = f"({random.randint(100, 999)}) {random.randint(100, 999)}-{random.randint(1000, 9999)}"
             work_location_idx = random.randint(0, len(work_locations) - 1)
@@ -73,11 +79,20 @@ def generate_data():
                 "job_role": job_role,
                 "work_location": work_location,
                 "salary": random.randint(starting_salary, starting_salary + 20000),
-                "direct_reports": [i for i in range(3)]
+                "direct_reports": []
             }
 
+            # using modulo to make sure each employee who is supposed to have a direct report has one
+            if prev_employees:
+                prev_employees[j % EMPLOYEE_NUMS[i - 1]]["direct_reports"].append(user_id)
+
+            employees_in_current_job_role.append(employee)
+            
             users.append(user)
-            employees.append(employee)
+        
+        # when we get to the next job role, we can assign direct reports to employees in the previous job role (job roles are in descending order of seniority)
+        prev_employees = employees_in_current_job_role
+        employees.append(prev_employees)
     
     return users, employees
 
