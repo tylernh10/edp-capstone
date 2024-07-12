@@ -70,7 +70,7 @@ def generate_data():
                 "password": get_password(16)
             }
             
-            starting_salary = math.floor(60000 * ((10 - i) / 2) * (1 + work_location_idx / 10))
+            starting_salary = math.floor(60000 * ((10 - i) / 2) * (1 + (9 - work_location_idx) / 10))
             employee = {
                 "user_id": user_id,
                 "first_name": first,
