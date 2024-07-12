@@ -8,6 +8,8 @@ const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
+    const navigate = useNavigate();
+
     // const { login } = useAuth();
     // const navigate = useNavigate();
 
@@ -20,7 +22,11 @@ const Login = () => {
 
     return (
         <div className="container">
-            <form onSubmit={{}} className="mt-5">
+            <form onSubmit={() => {
+                if (username === "test" && password === "test") {
+                    navigate('/');
+                }
+            }} className="mt-5">
                 <div className="form-group">
                     <label htmlFor="username">Username: </label>
                     <input
