@@ -91,8 +91,11 @@ def generate_data():
             users.append(user)
         
         # when we get to the next job role, we can assign direct reports to employees in the previous job role (job roles are in descending order of seniority)
+        if prev_employees:
+            employees += prev_employees
         prev_employees = employees_in_current_job_role
-        employees.append(prev_employees)
+    employees += prev_employees
+        
     
     return users, employees
 
