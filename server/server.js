@@ -26,7 +26,7 @@ app.get('/enterprise/employees', async (req, res) => {
         res.json(employees);
     } catch (err) {
         console.error("Error: ", err);
-        res.status(500).send("Something went wrong - Employees");
+        res.status(500).send({"message": "Something went wrong - Employees"});
     }
 });
 
@@ -41,7 +41,7 @@ app.get('/enterprise/users', async (req, res) => {
         res.json(users);
     } catch (err) {
         console.error("Error: ", err);
-        res.status(500).send("Something went wrong - Users");
+        res.status(500).send({"message": "Something went wrong - Users"});
     }
 }); 
 
@@ -61,13 +61,13 @@ app.post('/enterprise/login', async (req, res) => {
         if (user) {
             console.log(user);
             console.log(user.user_id);
-            res.status(200).send(user.user_id);
+            res.status(200).send({"uid": user.user_id});
         } else {
-            res.status(401).send("Invalid login credentials.");
+            res.status(401).send({"message": "Invalid login credentials."});
         }
     } catch (err) {
         console.error("Error: ", err);
-        res.status(500).send("Something went wrong - login.");
+        res.status(500).send({"message": "Something went wrong - login."});
     }
 });
 
@@ -86,11 +86,11 @@ app.post('/enterprise/employee', async (req, res) => {
             console.log(employee);
             res.status(200).send(employee);
         } else {
-            res.status(401).send("Employee not found.");
+            res.status(401).send({"message": "Employee not found."});
         }
     } catch (err) {
         console.error("Error: ", err);
-        res.status(500).send("Something went wrong - employee user_id.");
+        res.status(500).send({"message": "Something went wrong - employee user_id."});
     }
 });
 

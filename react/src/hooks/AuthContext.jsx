@@ -3,30 +3,42 @@ import React, { createContext, useContext, useState } from 'react';
 // Creating an authentication context
 const AuthContext = createContext(null);
 
+// server login endpoint
+const url = 'http://localhost:3000/enterprise/login';
+
 // Auth provider component that wraps your app components
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
+    const [userId, setUserId] = useState('');
 
     const login = async (username, password) => {
         try {
-            const response = await fetch(`${import.meta.env.VITE_SOCKS_API_URL}/login`, {
+            const response = await fetch(url, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ username, password }),
             });
-            const data = await response.json();
-            if (data.uid) {
-                setUser({
-                    username,
-                    // uid: data.uid // Storing the uid returned from the server
-                });
+            if (response.status == 200) {
+                const user = await response.json();
+                if (user) {
+                    console.log(user);
+                    setUserId(user.uid);
+                    setUser({
+                        username,
+                        uid: user.uid // Storing the uid returned from the server
+                    });
+                    return { success: true };
+                }
             } else {
-                throw new Error(data.message || 'Login failed');
+                const errorData = await response.json();
+                console.log(errorData);
+                return { success: false, message: errorData.message || 'Login failed' };
             }
         } catch (error) {
             console.error(error);
+            return { success: false, message: 'Login failed' };
         }
     };
 
