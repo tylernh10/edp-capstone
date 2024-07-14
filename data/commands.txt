@@ -3,7 +3,7 @@ These commands are for uploading JSON data in this directory to MongoDB.
 First, connect to localhost:27017 and make a DB called "enterprise_directory" with a collection "employees".
 
 Uploading users.json:
-mongoimport --uri mongodb://localhost:27017/employee_directory --collection users --drop --file users.json --jsonArray
+mongoimport --uri mongodb://localhost:27017/enterprise_directory --collection users --drop --file users.json --jsonArray
 
 Uploading employees.json:
-mongoimport --uri mongodb://localhost:27017/employee_directory --collection employees --drop --file employees.json --jsonArray
+mongoimport --uri mongodb://localhost:27017/enterprise_directory --collection employees --drop --file employees.json --jsonArray
