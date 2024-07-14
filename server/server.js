@@ -15,6 +15,7 @@ app.use(cors());
 app.use(express.json());
 const PORT = 3000;
 
+
 // GET employees collection
 app.get('/enterprise/employees', async (req, res) => {
     try {
@@ -36,12 +37,13 @@ app.get('/enterprise/users', async (req, res) => {
         const db = client.db(dbName);
         const users_collection = db.collection(usersCollection);
         const users = await users_collection.find({}).toArray();
+        console.log(users);
         res.json(users);
     } catch (err) {
         console.error("Error: ", err);
         res.status(500).send({"message": "Something went wrong - Users"});
     }
-});
+}); 
 
 app.post('/enterprise/login', async (req, res) => {
     try {
