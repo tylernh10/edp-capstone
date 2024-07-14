@@ -41,7 +41,7 @@ app.get('/enterprise/employees', async (req, res) => {
         const client = await MongoClient.connect(url);
         const db = client.db(dbName);
         const emp_collection = db.collection(employeesCollection);
-        const employees = await emp_collection.find(filter).toArray();
+        const employees = await emp_collection.find({}).project({salary: 0}).toArray();
         res.json(employees);
     } catch (err) {
         console.error("Error: ", err);
