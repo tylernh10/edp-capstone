@@ -10,7 +10,7 @@
   margin-top: 150px;
   width: var(--width-wrapper);
   position: relative;
-  overflow: hidden;
+  overflow: clip;
 }
 
 .wrapper [class*="cloud"] {
@@ -86,7 +86,7 @@
 .wrapper::before {
   content: "";
   background: url('https://firebasestorage.googleapis.com/v0/b/public-71dae.appspot.com/o/city.svg?alt=media&token=109c948c-1bcb-4e6c-9096-0066976197f1') repeat-x 0 70px;
-  height: 279px;
+  height: 300px;
   width: var(--width-wrapper);
   position: absolute;
   z-index: 2;
