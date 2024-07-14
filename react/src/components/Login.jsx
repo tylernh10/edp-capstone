@@ -2,31 +2,26 @@ import React from "react";
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-// import { useAuth } from "../hooks/AuthContext";
+import { useAuth } from "../hooks/AuthContext";
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-
+    const { login } = useAuth();
     const navigate = useNavigate();
 
-    // const { login } = useAuth();
-    // const navigate = useNavigate();
-
-    // const handleLogin = async (event) => {
-    //     event.preventDefault();
-    //     await login(username, password);
-    //     console.log(username, password);
-    //     // navigate('/add');
-    // };
+    const handleLogin = async (event) => {
+        event.preventDefault();
+        const result = await login(username, password);
+        if (result.success) {
+            navigate('/enterprise');
+        }
+        console.log(username, password);
+    };
 
     return (
         <div className="container">
-            <form onSubmit={() => {
-                if (username === "test" && password === "test") {
-                    navigate('/');
-                }
-            }} className="mt-5">
+            <form onSubmit={handleLogin} className="mt-5">
                 <div className="form-group">
                     <label htmlFor="username">Username: </label>
                     <input
