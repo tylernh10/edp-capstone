@@ -3,6 +3,9 @@ import React, { createContext, useContext, useState } from 'react';
 // Creating an authentication context
 const AuthContext = createContext(null);
 
+// server login endpoint
+const url = 'http://localhost:3000/enterprise/login';
+
 // Auth provider component that wraps your app components
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
@@ -10,7 +13,7 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (username, password) => {
         try {
-            const response = await fetch(import.meta.env.SERVER_LOGIN_URL, {
+            const response = await fetch(url, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -18,19 +21,20 @@ export const AuthProvider = ({ children }) => {
                 body: JSON.stringify({ username, password }),
             });
             if (response.status == 200) {
-                const user_id = await response.json();
-                if (user_id) {
-                    console.log(user_id);
-                    setUserId(userId);
+                const user = await response.json();
+                if (user) {
+                    console.log(user);
+                    setUserId(user.uid);
                     setUser({
                         username,
-                        uid: user_id // Storing the uid returned from the server
+                        uid: user.uid // Storing the uid returned from the server
                     });
                     return { success: true };
-                } else {
-                    const errorData = await response.json();
-                    return { success: false, message: errorData.message || 'Login failed' };
                 }
+            } else {
+                const errorData = await response.json();
+                console.log(errorData);
+                return { success: false, message: errorData.message || 'Login failed' };
             }
         } catch (error) {
             console.error(error);
