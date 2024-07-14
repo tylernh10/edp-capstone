@@ -12,6 +12,7 @@ import Login from './components/Login';
 import Employee from './components/Employee';
 import SearchResults from './components/SearchResults';
 
+import { AuthProvider } from './hooks/AuthContext';
 import './App.css'
 
 function App() {
@@ -20,11 +21,13 @@ function App() {
   return (
     <>
       <Router>
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/login" element={<Login />} />
-          <Route path="/employee/:name" element={<Employee />} />
-        </Routes>
+        <AuthProvider>
+          <Routes>
+            <Route exact path="/" element={<Login />} />
+            <Route exact path="/enterprise" element={<Home />} />
+            <Route path="/employee/:name" element={<Employee />} />
+          </Routes>
+        </AuthProvider>
       </Router>
     </>
   )
