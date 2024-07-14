@@ -1,0 +1,159 @@
+:root {
+  --width-wrapper: 1300px;
+  --time-sun: 120s;
+  --time-cloud: calc(var(--time-sun) / 2);
+  --time-car: 20s;
+}
+
+.wrapper {
+  height: 300px;
+  margin-top: 150px;
+  width: var(--width-wrapper);
+  position: relative;
+  overflow: clip;
+}
+
+.wrapper [class*="cloud"] {
+  background: url('https://firebasestorage.googleapis.com/v0/b/public-71dae.appspot.com/o/cloud.svg?alt=media&token=8d93d684-6e39-4783-b810-d1c7a7195766') no-repeat 0 0;
+  position: absolute;
+  display: block;
+  z-index: 1;
+  top: 85px;
+  left: -20px;
+  width: 18px;
+  height: 15px;
+  animation: cloudAnimation var(--time-cloud) linear 0s infinite none running;
+}
+
+.wrapper .cloud-2 {
+  animation-delay: 5s;
+  top: 15px;
+}
+
+.wrapper .cloud-3 {
+  animation-delay: 12s;
+  top: 40px;
+}
+
+.wrapper .cloud-4 {
+  background-image: url('https://firebasestorage.googleapis.com/v0/b/public-71dae.appspot.com/o/cloud-shadow.svg?alt=media&token=e72a904d-39ff-4666-afe5-840292c34119');
+  animation-delay: 18s;
+  top: 85px;
+}
+
+.wrapper .cloud-5 {
+  animation-delay: 25s;
+  top: 15px;
+}
+
+.wrapper .cloud-6 {
+  animation-delay: 28s;
+  top: 50px;
+}
+
+.wrapper .cloud-7 {
+  animation-delay: 33s;
+  top: 90px;
+}
+
+.wrapper .cloud-8 {
+  background-image: url('https://firebasestorage.googleapis.com/v0/b/public-71dae.appspot.com/o/cloud-shadow.svg?alt=media&token=e72a904d-39ff-4666-afe5-840292c34119g');
+  animation-delay: 38s;
+  top: 65px;
+}
+
+.wrapper .cloud-9 {
+  animation-delay: 44s;
+  top: 35px;
+}
+
+.wrapper .cloud-10 {
+  animation-delay: 50s;
+  top: 70px;
+}
+
+.wrapper .cloud-11 {
+  background-image: url('https://firebasestorage.googleapis.com/v0/b/public-71dae.appspot.com/o/cloud-shadow.svg?alt=media&token=e72a904d-39ff-4666-afe5-840292c34119');
+  animation-delay: 56s;
+  top: 15px;
+}
+
+.wrapper .cloud-12 {
+  animation-delay: 60s;
+  top: 55px;
+}
+
+.wrapper::before {
+  content: "";
+  background: url('https://firebasestorage.googleapis.com/v0/b/public-71dae.appspot.com/o/city.svg?alt=media&token=109c948c-1bcb-4e6c-9096-0066976197f1') repeat-x 0 70px;
+  height: 300px;
+  width: var(--width-wrapper);
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+}
+
+.wrapper .sun {
+  background: url('https://firebasestorage.googleapis.com/v0/b/public-71dae.appspot.com/o/sun.svg?alt=media&token=d1ff0292-6539-415d-9f1f-b79e64bf467b') no-repeat 0 0;
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  z-index: 1;
+  top: 30px;
+  left: -35px;
+  animation: sunAnimation var(--time-sun) linear 10s infinite none running;
+}
+
+.wrapper .car {
+  background: url('https://firebasestorage.googleapis.com/v0/b/public-71dae.appspot.com/o/car.svg?alt=media&token=bf1ae13e-cdc4-46d0-9902-8e543f4e56cf') no-repeat 0 0;
+  height: 23px;
+  width: 35px;
+  position: absolute;
+  top: 215px;
+  right: -50px;
+  animation: carAnimation var(--time-car) linear 0s infinite none running;
+}
+
+.wrapper .car-2 {
+  animation-delay: 5s;
+  top: 255px;
+}
+
+.wrapper .car-3 {
+  animation-delay: 10s;
+  top: 255px;
+}
+
+.wrapper .car-4 {
+  animation-delay: 15s;
+  animation-duration: 15s;
+  top: 230px;
+}
+
+@keyframes carAnimation {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(calc(-1 * (var(--width-wrapper) + 35px)), 0);
+  }
+}
+
+@keyframes cloudAnimation {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(calc(var(--width-wrapper) + 50px), 0);
+  }
+}
+
+@keyframes sunAnimation {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate(calc(var(--width-wrapper) + 50px), 0) rotate(359deg);
+  }
+}
