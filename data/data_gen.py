@@ -75,6 +75,7 @@ def generate_data():
                 "user_id": user_id,
                 "first_name": first,
                 "last_name": last,
+                "full_name": first + " " + last,
                 "phone_number": phone,
                 "job_role": job_role,
                 "work_location": work_location,

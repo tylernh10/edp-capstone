@@ -14,6 +14,7 @@ def upload_data(collection_name, json_file=None):
     client = pymongo.MongoClient("mongodb://localhost:27017/")
     db = client["enterprise_directory"]
     
+    db[collection_name].drop()
     collection = db[collection_name]
     collection.insert_many(data)
 

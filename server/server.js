@@ -19,10 +19,29 @@ const PORT = 3000;
 // GET employees collection
 app.get('/enterprise/employees', async (req, res) => {
     try {
+        // optional query parameters for filtering
+        const name = req.query.name;
+        const role = req.query.role;
+        const location = req.query.location;
+
+        const filter = {};
+
+        if (name) {
+            filter.full_name = { $regex: new RegExp(name, 'i') };
+        }
+
+        if (role) {
+            filter.job_role = { $regex: new RegExp(role, 'i') };
+        }
+
+        if (location) {
+            filter.work_location = { $regex: new RegExp(location, 'i') };
+        }
+
         const client = await MongoClient.connect(url);
         const db = client.db(dbName);
         const emp_collection = db.collection(employeesCollection);
-        const employees = await emp_collection.find({}).toArray();
+        const employees = await emp_collection.find(filter).toArray();
         res.json(employees);
     } catch (err) {
         console.error("Error: ", err);
