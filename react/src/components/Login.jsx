@@ -9,22 +9,18 @@ import FractalTree from "./FractalTree";
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const { user, login } = useAuth();
+    const auth = useAuth();
     const navigate = useNavigate();
-    console.log("Is logged in: " + user);
-    if (user) {
+    if (auth?.user) {
         navigate("/");
     }
 
     const handleLogin = async (event) => {
         event.preventDefault();
-        const result = await login(username, password);
+        const result = await auth.login(username, password);
         if (result.success) {
             navigate('/');
-            console.log(user);
         }
-        console.log(username, password);
-        console.log("TEST: " + user)
     };
 
     return (

@@ -21,14 +21,14 @@ export const AuthProvider = ({ children }) => {
                 body: JSON.stringify({ username, password }),
             });
             if (response.status == 200) {
-                const user = await response.json();
-                if (user) {
-                    console.log(user);
-                    setUserId(user.uid);
+                const userRes = await response.json();
+                if (userRes) {
+                    setUserId(userRes.uid);
                     setUser({
                         username,
-                        uid: user.uid // Storing the uid returned from the server
+                        uid: userRes.uid
                     });
+                    console.log(user);
                     return { success: true };
                 }
             } else {
