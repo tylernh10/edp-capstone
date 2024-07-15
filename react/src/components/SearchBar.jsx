@@ -6,6 +6,7 @@ import './Search.css';
 const jobRolesOptions = [
     { value: 'Chief Executive Officer', label: 'Chief Executive Officer' },
     { value: 'Chief Technology Officer', label: 'Chief Technology Officer' },
+    { value: 'Chief Communications Officer', label: 'Chief Communications Officer' },
     { value: 'Director of Engineering', label: 'Director of Engineering' },
     { value: 'Engineering Manager', label: 'Engineering Manager' },
     { value: 'Project Manager', label: 'Project Manager' },
@@ -13,11 +14,10 @@ const jobRolesOptions = [
     { value: 'Senior Software Engineer', label: 'Senior Software Engineer' },
     { value: 'Software Engineer', label: 'Software Engineer' },
     { value: 'Junior Developer', label: 'Junior Developer' },
-    { value: 'Intern', label: 'Intern' },
-    { value: 'Chief Communications Officer', label: 'Chief Communications Officer' },
     { value: 'HR Director', label: 'HR Director' },
     { value: 'HR Associate', label: 'HR Associate' },
     { value: 'HR Assistant', label: 'HR Assistant' },
+    { value: 'Intern', label: 'Intern' },
 ];
 
 const workLocationsOptions = [
@@ -114,7 +114,7 @@ const SearchBar = () => {
                         onChange={setSelectedWorkLocations}
                     />
                 </div>
-                <button className="btn btn-outline-success" type="submit">Search</button>
+                <button className="btn-primary" type="submit">Search</button>
             </form>
         </div>
     );
