@@ -13,7 +13,11 @@ const jobRolesOptions = [
     { value: 'Senior Software Engineer', label: 'Senior Software Engineer' },
     { value: 'Software Engineer', label: 'Software Engineer' },
     { value: 'Junior Developer', label: 'Junior Developer' },
-    { value: 'Intern', label: 'Intern' }
+    { value: 'Intern', label: 'Intern' },
+    { value: 'Chief Communications Officer', label: 'Chief Communications Officer' },
+    { value: 'HR Director', label: 'HR Director' },
+    { value: 'HR Associate', label: 'HR Associate' },
+    { value: 'HR Assistant', label: 'HR Assistant' },
 ];
 
 const workLocationsOptions = [
