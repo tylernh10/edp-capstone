@@ -1,6 +1,5 @@
-import React from "react";
-import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import Typewriter from 'typewriter-effect';
 
 import { useAuth } from "../hooks/AuthContext";
@@ -23,7 +22,7 @@ const Login = () => {
     };
 
     return (
-        <div>
+        <div id="root">
             <div className="login-header">
                 Enterprise Directory
             </div>
@@ -31,7 +30,6 @@ const Login = () => {
                 <div className="form-container">
                     <FractalTree />
                     <div className="login-card">
-                        <div className="login-text">Sign In</div>
                         <form onSubmit={handleLogin} className="mt-5">
                             <div className="form-group">
                                 <label htmlFor="username">Username: </label>
@@ -59,19 +57,19 @@ const Login = () => {
                         </form>
                     </div>
                 </div>
-            </div>
-            <div className="nt-names">
-                <Typewriter
-                    options={{
-                        strings: ['Tyler Hinrichs & Noor Majid', 'Bitwise Barons'],
-                        autoStart: true,
-                        loop: true,
-                    }}
-                />
-                EDP - July 2024
+                <div className="nt-names">
+                    <Typewriter
+                        options={{
+                            strings: ['Tyler Hinrichs & Noor Majid', 'Bitwise Barons'],
+                            autoStart: true,
+                            loop: true,
+                        }}
+                    />
+                    EDP - July 2024
+                </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Login;
