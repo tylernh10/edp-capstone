@@ -9,7 +9,7 @@ const url = process.env.MONGO_DB_URL;
 const dbName = process.env.MONGO_DB_NAME;
 const employeesCollection = process.env.MONGO_DB_EMPLOYEES;
 const usersCollection = process.env.MONGO_DB_USERS;
-const flaskUrl = process.env.FLASK_MODEL_URL
+const flaskUrl = process.env.FLASK_MODEL_URL;
 
 const app = express();
 app.use(cors());
