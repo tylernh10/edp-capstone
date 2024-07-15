@@ -12,7 +12,11 @@ job_roles = [
     "Senior Software Engineer",
     "Software Engineer",
     "Junior Developer",
-    "Intern"
+    "Intern",
+    "Chief Communications Officer",
+    "HR Director",
+    "HR Associate",
+    "HR Assistant"
 ]
 
 work_locations = [

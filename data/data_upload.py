@@ -12,6 +12,7 @@ def upload_data(collection_name, json_file=None):
         data = json.load(f)
     
     client = pymongo.MongoClient("mongodb://localhost:27017/")
+    
     db = client["enterprise_directory"]
     
     db[collection_name].drop()
