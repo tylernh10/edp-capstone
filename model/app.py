@@ -66,8 +66,6 @@ def predict():
         all_cols = ["job_role_" + i for i in job_roles] + ["work_location_" + i for i in work_locations]
         df = pd.DataFrame(columns=all_cols)
         df.loc[len(df)] = job_type_bools + work_location_bools
-        df.sort_index(axis=1)
-        print(df.head().index.tolist())
 
         prediction = model.predict(df)
         return jsonify(prediction.tolist())
