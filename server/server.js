@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import { promises as fs } from 'fs';
 import { MongoClient, ObjectId } from 'mongodb';
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
 
 dotenv.config();
 const url = process.env.MONGO_DB_URL;
@@ -11,6 +11,7 @@ const employeesCollection = process.env.MONGO_DB_EMPLOYEES;
 const usersCollection = process.env.MONGO_DB_USERS;
 const flaskUrl = process.env.FLASK_MODEL_URL
 
+const fetch = require('node-fetch');
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -120,7 +121,29 @@ app.post('/enterprise/employee', async (req, res) => {
 app.post('/predictor', async (req, res) => {
     const role = req.query.job_type;
     const location = req.query.work_location;
-})
+
+    try {
+        const response = await fetch('http://localhost:5000/api/predict', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                job_type: role,
+                work_location: location
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        res.status(200).json(data);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
 app.listen(PORT, () => {
     console.log(`Server is listening on http://localhost:${PORT}`);
