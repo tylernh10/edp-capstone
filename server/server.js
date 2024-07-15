@@ -9,6 +9,7 @@ const url = process.env.MONGO_DB_URL;
 const dbName = process.env.MONGO_DB_NAME;
 const employeesCollection = process.env.MONGO_DB_EMPLOYEES;
 const usersCollection = process.env.MONGO_DB_USERS;
+const flaskUrl = process.env.FLASK_MODEL_URL
 
 const app = express();
 app.use(cors());
@@ -115,6 +116,11 @@ app.post('/enterprise/employee', async (req, res) => {
         res.status(500).send({"message": "Something went wrong - employee user_id."});
     }
 });
+
+app.post('/predictor', async (req, res) => {
+    const role = req.query.job_type;
+    const location = req.query.work_location;
+})
 
 app.listen(PORT, () => {
     console.log(`Server is listening on http://localhost:${PORT}`);
