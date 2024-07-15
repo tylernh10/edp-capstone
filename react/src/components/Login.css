@@ -8,7 +8,7 @@
     background: radial-gradient(ellipse at top, #313d5a, transparent),
                 radial-gradient(ellipse at bottom, rgb(33, 140, 79), transparent);
     color: white;
-    font-family: 'PT Serif';
+    font-family: 'Inter';
 }
 
 .login-header {
