@@ -83,7 +83,7 @@ const SearchBar = () => {
                 <input
                     className="custom-search-bar"
                     type="search"
-                    placeholder="Search"
+                    placeholder="Search by name"
                     aria-label="Search"
                     value={searchTerm}
                     onChange={handleChange}
