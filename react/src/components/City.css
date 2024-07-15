@@ -90,6 +90,8 @@
   width: var(--width-wrapper);
   position: absolute;
   z-index: 2;
+  display: flex;
+  justify-content: center;
   top: 0;
   left: 0;
 }

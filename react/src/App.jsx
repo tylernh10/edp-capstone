@@ -8,6 +8,7 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Employee from './components/Employee';
 import SearchResults from './components/SearchResults';
+import Predictor from "./components/Predictor";
 
 import { AuthProvider } from './hooks/AuthContext';
 import './App.css'
@@ -23,6 +24,7 @@ function App() {
             <Route exact path="/enterprise" element={<Home />} />
             <Route path="/employee/:name" element={<Employee />} />
             <Route path="/search" element={<SearchResults />} />
+            <Route path="/predictor" element={<Predictor />} />
           </Routes>
         </AuthProvider>
       </Router>

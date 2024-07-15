@@ -3,21 +3,14 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import Navigation from "./Navigation";
-import SearchBar from "./SearchBar";
-import City from "./City";
 
-const Home = () => {
+const Predictor = (props) => {
     return (
         <div className="home-container">
             <Navigation />
-            <div>
-                <SearchBar />
-            </div>
-            <div>
-                <City />
-            </div>
+            Salary Predictor Page
         </div>
     )
 }
 
-export default Home;
+export default Predictor;
