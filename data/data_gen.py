@@ -91,6 +91,7 @@ def generate_data():
                 "last_name": last,
                 "full_name": first + " " + last,
                 "phone_number": phone,
+                "email": first.lower() + last.lower() + "@example.com",
                 "job_role": job_role,
                 "work_location": work_location,
                 "salary": random.randint(starting_salary, starting_salary + 20000),
@@ -101,6 +102,7 @@ def generate_data():
             # using modulo to make sure each employee who is supposed to have a direct report has one
             if prev_employees:
                 prev_employees[j % EMPLOYEE_NUMS[i - 1]]["direct_reports"].append(user_id)
+                employee["manager"] = prev_employees[j % EMPLOYEE_NUMS[i - 1]]["user_id"]
 
             employees_in_current_job_role.append(employee)
             
@@ -140,6 +142,7 @@ def generate_data():
                 "last_name": last,
                 "full_name": first + " " + last,
                 "phone_number": phone,
+                "email": first.lower() + last.lower() + "@example.com",
                 "job_role": job_role,
                 "work_location": work_location,
                 "salary": random.randint(starting_salary, starting_salary + 20000),
@@ -150,6 +153,7 @@ def generate_data():
             # using modulo to make sure each employee who is supposed to have a direct report has one
             if prev_employees:
                 prev_employees[j % HR_NUMS[i - 1]]["direct_reports"].append(user_id)
+                employee["manager"] = prev_employees[j % HR_NUMS[i - 1]]["user_id"]
             
             if i == 0:
                 prev_employees = None
