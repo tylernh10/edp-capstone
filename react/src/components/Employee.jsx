@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import Navigation from "./Navigation";
 
-const Employee = () => {
+const Employee = (props) => {
     return (
         <div className="home-container">
             <Navigation />
