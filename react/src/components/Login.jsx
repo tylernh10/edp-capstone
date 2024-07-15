@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useAuth } from "../hooks/AuthContext";
-import City from "./City";
+import './Login.css';
+import FractalTree from "./FractalTree";
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -21,8 +22,12 @@ const Login = () => {
     };
 
     return (
-        <div>
-            <div className="container">
+        <div className="login-container">
+            <div className="login-header">
+                Enterprise Directory
+            </div>
+            <div className="form-container">
+                <FractalTree />
                 <form onSubmit={handleLogin} className="mt-5">
                     <div className="form-group">
                         <label htmlFor="username">Username: </label>
@@ -48,9 +53,6 @@ const Login = () => {
                     </div>
                     <button type="submit" className="btn btn-primary">Login</button>
                 </form>
-            </div>
-            <div>
-                <City />
             </div>
         </div>
     )
