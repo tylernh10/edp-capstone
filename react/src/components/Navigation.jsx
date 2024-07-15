@@ -10,6 +10,9 @@ const Navigation = () => {
             <Link to="/predictor">
                 <div className="nav-link-text">Predictor</div>
             </Link>
+            <Link to="/employee" style={{ marginLeft: 'auto' }}>
+                <div className="nav-link-text">Profile</div>
+            </Link>
         </div>
     );
 };
