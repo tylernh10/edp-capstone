@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import Typewriter from 'typewriter-effect';
 
 import { useAuth } from "../hooks/AuthContext";
@@ -9,16 +9,22 @@ import FractalTree from "./FractalTree";
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const { login } = useAuth();
+    const { user, login } = useAuth();
     const navigate = useNavigate();
+    console.log("Is logged in: " + user);
+    if (user) {
+        navigate("/");
+    }
 
     const handleLogin = async (event) => {
         event.preventDefault();
         const result = await login(username, password);
         if (result.success) {
-            navigate('/enterprise');
+            navigate('/');
+            console.log(user);
         }
         console.log(username, password);
+        console.log("TEST: " + user)
     };
 
     return (

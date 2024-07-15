@@ -4,7 +4,7 @@ import './Navigation.css';
 const Navigation = () => {
     return (
         <div className="navigation-links">
-            <Link to="/enterprise">
+            <Link to="/">
                 <div className="nav-link-text">Search</div>
             </Link>
             <Link to="/predictor">

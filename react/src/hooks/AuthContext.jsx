@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     const logout = () => {
-        setUser(null); // In real scenarios, you might want to invalidate the session on the server as well
+        setUser(null);
     };
 
     return (

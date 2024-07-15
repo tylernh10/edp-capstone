@@ -12,6 +12,7 @@ import Predictor from "./components/Predictor";
 
 import { AuthProvider } from './hooks/AuthContext';
 import './App.css'
+import RequireAuth from './components/RequireAuth'
 
 function App() {
 
@@ -20,11 +21,11 @@ function App() {
       <Router>
         <AuthProvider>
           <Routes>
-            <Route exact path="/" element={<Login />} />
-            <Route exact path="/enterprise" element={<Home />} />
-            <Route path="/employee" element={<Employee />} />
-            <Route path="/search" element={<SearchResults />} />
-            <Route path="/predictor" element={<Predictor />} />
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/" element={<RequireAuth><Home /></RequireAuth>} />
+            <Route path="/employee" element={<RequireAuth><Employee /></RequireAuth>} />
+            <Route path="/search" element={<RequireAuth><SearchResults /></RequireAuth>} />
+            <Route path="/predictor" element={<RequireAuth><Predictor /></RequireAuth>} />
           </Routes>
         </AuthProvider>
       </Router>
