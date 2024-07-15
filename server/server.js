@@ -94,12 +94,10 @@ app.post('/enterprise/login', async (req, res) => {
 });
 
 // POST employee info - specific user_id
-// note two ways to do this: url param or req body
 app.post('/enterprise/employee', async (req, res) => {
-// app.post('/enterprise/employee/:uid', async (req, res) => {
     try {
-        // const userId = req.params.uid;
-        const userId = req.body.uid
+        const logged = req.body.uid;
+        
         const client = await MongoClient.connect(url);
         const db = client.db(dbName);
         const emp_collection = db.collection(employeesCollection);

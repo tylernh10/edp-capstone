@@ -8,7 +8,7 @@ import './Search.css'
 import Navigation from "./Navigation";
 
 const Employee = (props) => {
-
+    
 
     return (
         <div>
@@ -47,7 +47,7 @@ const Employee = (props) => {
                 <div>
                     <h2 className="text-muted">Direct Reports</h2>
                     <div className="center-container direct-reports">
-                        {/* {searchData.length > 0 ? (
+                        {/* {directReports.length > 0 ? (
                             searchData.map((employee, index) => (
                                 <div key={index} className="employee-card">
                                     <h2>{employee.full_name}</h2>
@@ -85,7 +85,7 @@ const Employee = (props) => {
                         </div>
                     </div>
                 </div>
-                
+
             </div>
             <div>
                 <City />
