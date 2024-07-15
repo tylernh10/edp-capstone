@@ -2,26 +2,49 @@ import React from "react";
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import City from "./City";
-import './Search.css';
+import './Employee.css';
+import './Search.css'
 
 import Navigation from "./Navigation";
 
 const Employee = (props) => {
     return (
-        <div className="home-container">
+        <div>
             <Navigation />
-            <h2>Tyler Hinrichs <span>(you)</span></h2>
-            <div className="employee-card">
-                <span>Organization Info</span>
-                <div>Role</div>
-                <div>Manager</div>
-                <div>Salary</div>
-            </div>
-            <div>
-                Contact Info
-            </div>
-            <div>
-                Direct Reports
+            <div className="center-container">
+                <h1 className="title">Tyler Hinrichs <span className="text-muted">(you)</span></h1>
+                <div className="card">
+                    <h2 className="text-muted">Organization Info</h2>
+                    <div className="labeled-info">
+                        <div className="text-muted">Role: </div>
+                        <div>Software Engineer</div>
+                    </div>
+                    <div className="separator"></div>
+                    <div className="labeled-info">
+                        <div className="text-muted">Manager: </div>
+                        <div>Rajat Chaurasia</div>
+                    </div>
+                    <div className="separator"></div>
+                    <div className="labeled-info">
+                        <div className="text-muted">Salary: </div>
+                        <div>$86,000</div>
+                    </div>
+                </div>
+                <div className="card">
+                    <h2 className="text-muted">Contact Info</h2>
+                    <div className="labeled-info">
+                        <div className="text-muted">Email: </div>
+                        <div>thinrich@travelers.com</div>
+                    </div>
+                    <div className="separator"></div>
+                    <div className="labeled-info">
+                        <div className="text-muted">Phone: </div>
+                        <div>(860) 860-8608</div>
+                    </div>
+                </div>
+                <div>
+                    <h2 className="text-muted">Direct Reports</h2>
+                </div>
             </div>
             <div>
                 <City />
