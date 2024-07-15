@@ -11,7 +11,6 @@ const employeesCollection = process.env.MONGO_DB_EMPLOYEES;
 const usersCollection = process.env.MONGO_DB_USERS;
 const flaskUrl = process.env.FLASK_MODEL_URL
 
-const fetch = require('node-fetch');
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -121,9 +120,10 @@ app.post('/enterprise/employee', async (req, res) => {
 app.post('/predictor', async (req, res) => {
     const role = req.query.job_type;
     const location = req.query.work_location;
+    console.log(role, location)
 
     try {
-        const response = await fetch('http://localhost:5000/api/predict', {
+        const response = await fetch(flaskUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
