@@ -1,5 +1,7 @@
 import React from "react";
 import { useLocation } from 'react-router-dom';
+
+import Navigation from "./Navigation";
 import './Search.css';
 
 const SearchResults = () => {
@@ -8,8 +10,9 @@ const SearchResults = () => {
     console.log(searchData, "results")
 
     return (
-        <div>
-            <h1>Search Results</h1>
+        <div className="home-container">
+            <Navigation />
+            <h1 style={{ fontFamily: 'PT Serif' }}>Search Results</h1>
             <div className="results-container">
                 {searchData.length > 0 ? (
                     searchData.map((employee, index) => (
