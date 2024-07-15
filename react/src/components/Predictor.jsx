@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 
 import Navigation from "./Navigation";
 
-const Employee = () => {
+const Predictor = (props) => {
     return (
         <div className="home-container">
             <Navigation />
-            Employee Page
+            Salary Predictor Page
         </div>
     )
 }
 
-export default Employee;
+export default Predictor;

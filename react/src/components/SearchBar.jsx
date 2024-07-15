@@ -88,7 +88,7 @@ const SearchBar = () => {
                     value={searchTerm}
                     onChange={handleChange}
                 />
-                <div className="filters">
+                <div className="filters" >
                     <Select
                         isMulti
                         name="jobRoles"

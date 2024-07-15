@@ -7,10 +7,12 @@
 
 .wrapper {
   height: 300px;
-  margin-top: 150px;
+  margin-top: 40px;
   width: var(--width-wrapper);
   position: relative;
   overflow: clip;
+  margin-left: 80px;
+  z-index: 0;
 }
 
 .wrapper [class*="cloud"] {
@@ -90,6 +92,8 @@
   width: var(--width-wrapper);
   position: absolute;
   z-index: 2;
+  display: flex;
+  justify-content: center;
   top: 0;
   left: 0;
 }
