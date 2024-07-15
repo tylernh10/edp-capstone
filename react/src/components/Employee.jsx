@@ -8,6 +8,8 @@ import './Search.css'
 import Navigation from "./Navigation";
 
 const Employee = (props) => {
+
+
     return (
         <div>
             <Navigation />
@@ -44,7 +46,46 @@ const Employee = (props) => {
                 </div>
                 <div>
                     <h2 className="text-muted">Direct Reports</h2>
+                    <div className="center-container direct-reports">
+                        {/* {searchData.length > 0 ? (
+                            searchData.map((employee, index) => (
+                                <div key={index} className="employee-card">
+                                    <h2>{employee.full_name}</h2>
+                                    <p>Role: {employee.job_role}</p>
+                                    <p>Location: {employee.work_location}</p>
+                                </div>
+                            ))
+                        ) : (
+                            <p>No results found</p>
+                        )} */}
+                        <div className="employee-card">
+                            <h2>Alan Schnitzer</h2>
+                            <p>Role: Chief Executive Officer</p>
+                            <p>Location: Hartford</p>
+                        </div>
+                        <div className="employee-card">
+                            <h2>Alan Schnitzer</h2>
+                            <p>Role: Chief Executive Officer</p>
+                            <p>Location: Hartford</p>
+                        </div>
+                        <div className="employee-card">
+                            <h2>Alan Schnitzer</h2>
+                            <p>Role: Chief Executive Officer</p>
+                            <p>Location: Hartford</p>
+                        </div>
+                        <div className="employee-card">
+                            <h2>Alan Schnitzer</h2>
+                            <p>Role: Chief Executive Officer</p>
+                            <p>Location: Hartford</p>
+                        </div>
+                        <div className="employee-card">
+                            <h2>Alan Schnitzer</h2>
+                            <p>Role: Chief Executive Officer</p>
+                            <p>Location: Hartford</p>
+                        </div>
+                    </div>
                 </div>
+                
             </div>
             <div>
                 <City />
