@@ -1,5 +1,5 @@
 :root {
-  --width-wrapper: 1300px;
+  --width-wrapper: 1100px;
   --time-sun: 120s;
   --time-cloud: calc(var(--time-sun) / 2);
   --time-car: 20s;
