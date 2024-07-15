@@ -19,6 +19,7 @@ body, html, #root {
     display: flex;
     justify-content: flex-start; 
     padding: 0;
+    margin-bottom: 20px;
 }
 
 .navigation-links a {
