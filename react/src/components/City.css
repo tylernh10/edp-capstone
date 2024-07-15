@@ -12,6 +12,7 @@
   position: relative;
   overflow: clip;
   margin-left: 80px;
+  z-index: 0;
 }
 
 .wrapper [class*="cloud"] {
