@@ -5,10 +5,10 @@ const Navigation = () => {
     return (
         <div className="navigation-links">
             <Link to="/enterprise">
-                <div className="nav-link-text">Home</div>
+                <div className="nav-link-text">Search</div>
             </Link>
             <Link to="/predictor">
-                <div className="nav-link-text">Predictor</div>
+                <div className="nav-link-text">Salary Predictor</div>
             </Link>
             <Link to="/employee" style={{ marginLeft: 'auto' }}>
                 <div className="nav-link-text">Profile</div>
