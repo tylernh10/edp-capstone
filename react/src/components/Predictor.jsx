@@ -89,11 +89,13 @@ const Predictor = () => {
             <button className="btn-primary" onClick={handlePrediction}>
                 Predict Salary
             </button>
-            {predictedSalary && (
-                <div className="predicted-salary">
-                    Predicted Salary: ${new Intl.NumberFormat('en-US').format(predictedSalary)}
-                </div>
-            )}
+            <div className="predicted-salary">
+                Predicted Salary: {predictedSalary ? (
+                    <span>${new Intl.NumberFormat('en-US').format(predictedSalary)}</span>
+                ) : (
+                    <span></span>
+                )}
+            </div>
             <div>
                 <City />
             </div>
