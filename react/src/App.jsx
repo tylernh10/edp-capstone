@@ -1,10 +1,7 @@
-import { useState, useEffect } from 'react'
 import {
   BrowserRouter as Router,
   Route,
   Routes,
-  Link,
-  useNavigate
 } from "react-router-dom";
 
 import Home from './components/Home';
@@ -16,7 +13,6 @@ import { AuthProvider } from './hooks/AuthContext';
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
@@ -26,6 +22,7 @@ function App() {
             <Route exact path="/" element={<Login />} />
             <Route exact path="/enterprise" element={<Home />} />
             <Route path="/employee/:name" element={<Employee />} />
+            <Route path="/search" element={<SearchResults />} />
           </Routes>
         </AuthProvider>
       </Router>

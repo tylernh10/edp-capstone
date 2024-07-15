@@ -23,25 +23,28 @@ app.get('/enterprise/employees', async (req, res) => {
         const name = req.query.name;
         const role = req.query.role;
         const location = req.query.location;
-
         const filter = {};
+
+        console.log(name, role, location);
 
         if (name) {
             filter.full_name = { $regex: new RegExp(name, 'i') };
         }
 
         if (role) {
-            filter.job_role = { $regex: new RegExp(role, 'i') };
+            if (Array.isArray(role)) filter.job_role = { $in: role };
+            else filter.job_role = { $regex: new RegExp(role, 'i') };
         }
 
         if (location) {
-            filter.work_location = { $regex: new RegExp(location, 'i') };
+            if (Array.isArray(location)) filter.work_location = { $in: location };
+            else filter.work_location = { $regex: new RegExp(location, 'i') };
         }
 
         const client = await MongoClient.connect(url);
         const db = client.db(dbName);
         const emp_collection = db.collection(employeesCollection);
-        const employees = await emp_collection.find({}).project({salary: 0}).toArray();
+        const employees = await emp_collection.find(filter).project({salary: 0}).toArray();
         res.json(employees);
     } catch (err) {
         console.error("Error: ", err);

@@ -8,7 +8,6 @@ import City from "./City";
 const Home = () => {
     return (
         <div>
-            Home Page
             <div>
                 <SearchBar />
             </div>
