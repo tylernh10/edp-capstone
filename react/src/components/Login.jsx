@@ -30,6 +30,7 @@ const Login = () => {
                 <div className="form-container">
                     <FractalTree />
                     <div className="login-card">
+                        <div className="login-text">Sign In</div>
                         <form onSubmit={handleLogin} className="mt-5">
                             <div className="form-group">
                                 <label htmlFor="username">Username: </label>
