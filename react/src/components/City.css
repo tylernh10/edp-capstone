@@ -1,5 +1,5 @@
 :root {
-  --width-wrapper: 1100px;
+  --width-wrapper: 80vw;
   --time-sun: 120s;
   --time-cloud: calc(var(--time-sun) / 2);
   --time-car: 20s;
@@ -11,7 +11,7 @@
   width: var(--width-wrapper);
   position: relative;
   overflow: clip;
-  margin-left: 80px;
+  margin: auto;
   z-index: 0;
 }
 

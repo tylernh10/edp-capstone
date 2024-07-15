@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Select from 'react-select';
 
 import Navigation from "./Navigation";
+import City from "./City";
 import './Predictor.css';
 
 const jobRolesOptions = [
@@ -85,14 +86,17 @@ const Predictor = () => {
                     onChange={setSelectedWorkLocation}
                 />
             </div>
-            <button className="predict-button" onClick={handlePrediction}>
+            <button className="btn-primary" onClick={handlePrediction}>
                 Predict Salary
             </button>
             {predictedSalary && (
                 <div className="predicted-salary">
-                    Predicted Salary: {predictedSalary}
+                    Predicted Salary: ${new Intl.NumberFormat('en-US').format(predictedSalary)}
                 </div>
             )}
+            <div>
+                <City />
+            </div>
         </div>
     );
 };
