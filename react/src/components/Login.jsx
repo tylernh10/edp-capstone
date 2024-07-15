@@ -25,13 +25,7 @@ const Login = () => {
     return (
         <div>
             <div className="login-header">
-                <Typewriter
-                    options={{
-                        strings: ['Enterprise Directory'],
-                        autoStart: true,
-                        loop: true,
-                    }}
-                />
+                Enterprise Directory
             </div>
             <div className="login-container">
                 <div className="form-container">
@@ -69,7 +63,7 @@ const Login = () => {
             <div className="nt-names">
                 <Typewriter
                     options={{
-                        strings: ['Tyler Hinrichs & Noor Majid'],
+                        strings: ['Tyler Hinrichs & Noor Majid', 'Bitwise Barons'],
                         autoStart: true,
                         loop: true,
                     }}
