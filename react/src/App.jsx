@@ -27,9 +27,6 @@ function App() {
             <Route path={`/employee/:id`} element={<RequireAuth><Employee /></RequireAuth>} />
             <Route path="/search" element={<RequireAuth><SearchResults /></RequireAuth>} />
             <Route path="/predictor" element={<RequireAuth><Predictor /></RequireAuth>} />
-            {/* <Route path="/employee" element={<Employee />} />
-            <Route path="/search" element={<SearchResults />} />
-            <Route path="/predictor" element={<Predictor />} /> */}
           </Routes>
         </Router>
       </AuthProvider>

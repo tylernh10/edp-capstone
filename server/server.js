@@ -82,8 +82,6 @@ app.post('/enterprise/login', async (req, res) => {
         const users_collection = db.collection(usersCollection);
         const user = await users_collection.findOne({ "username": username, "password": password });
         if (user) {
-            console.log(user);
-            console.log(user.user_id);
             res.status(200).send({"user_id": user.user_id});
         } else {
             res.status(401).send({"message": "Invalid login credentials."});
@@ -138,7 +136,7 @@ app.post('/predictor', async (req, res) => {
 
         const data = await response.json();
         res.status(200).json(data);
-    } catch (error) {
+    } catch (err) {
         console.error("Error: ", err);
         res.status(500).send({"message": "Something went wrong - predictor."});
     }
