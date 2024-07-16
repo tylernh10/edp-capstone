@@ -1,8 +1,12 @@
+.text-muted {
+    color: #7a7676;
+}
+
 .dropdowns {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 40px;
+    margin-top: 20px;
     width: 100%;
     color: black;
 }
