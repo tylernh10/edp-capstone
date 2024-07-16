@@ -45,6 +45,33 @@ const Employee = () => {
         }
     };
 
+    const fetchDirectReports = async (direct_reports) => {
+        const drs = [];
+        for (let dr of direct_reports) {
+            try {
+                const response = await fetch('http://localhost:3000/enterprise/employee', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ login_id: login_id, user_id: dr }),
+                });
+                if (response.status == 200) {
+                    const res = await response.json();
+                    if (res) {
+                        drs.push(res);
+                    }
+                } else {
+                    const errorData = await response.json();
+                    console.error("Error: ", errorData.message || 'Employee not found.');
+                }
+            } catch (error) {
+                console.error("Error: ", error);
+            }
+        }
+        setDirectReports(drs);
+    };
+
     useEffect(() => {
         fetchEmployee(id, setEmployeeData);
         setManagerInfo(null);
@@ -56,9 +83,7 @@ const Employee = () => {
             fetchEmployee(employeeData.manager, setManagerInfo);
         }
         if (employeeData && "direct_reports" in employeeData) {
-            employeeData.direct_reports.forEach((report) => {
-                fetchEmployee(report, setDirectReports, directReports);
-            })
+            fetchDirectReports(employeeData.direct_reports);
         };
     }, [employeeData]);
 
