@@ -11,11 +11,12 @@ import SearchResults from './components/SearchResults';
 import Predictor from "./components/Predictor";
 
 import RequireAuth from './components/RequireAuth'
-import { AuthProvider } from './hooks/AuthContext';
+import { AuthProvider, useAuth } from './hooks/AuthContext';
 import './App.css'
 
 function App() {
-
+  const auth = useAuth();
+  
   return (
     <>
       <AuthProvider>
@@ -23,12 +24,9 @@ function App() {
           <Routes>
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/" element={<RequireAuth><Home /></RequireAuth>} />
-            <Route path="/employee" element={<RequireAuth><Employee /></RequireAuth>} />
+            <Route path={`/employee/:id`} element={<RequireAuth><Employee /></RequireAuth>} />
             <Route path="/search" element={<RequireAuth><SearchResults /></RequireAuth>} />
             <Route path="/predictor" element={<RequireAuth><Predictor /></RequireAuth>} />
-            {/* <Route path="/employee" element={<Employee />} />
-            <Route path="/search" element={<SearchResults />} />
-            <Route path="/predictor" element={<Predictor />} /> */}
           </Routes>
         </Router>
       </AuthProvider>
@@ -36,4 +34,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

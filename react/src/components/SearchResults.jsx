@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import Navigation from "./Navigation";
 import SearchBar from "./SearchBar";
@@ -21,7 +21,9 @@ const SearchResults = () => {
                 {searchData.length > 0 ? (
                     searchData.map((employee, index) => (
                         <div key={index} className="employee-card">
-                            <h2>{employee.full_name}</h2>
+                            <Link to={`/employee/${employee.user_id}`}>
+                                <h2>{employee.full_name}</h2>
+                            </Link>
                             <p>Role: {employee.job_role}</p>
                             <p>Location: {employee.work_location}</p>
                         </div>
