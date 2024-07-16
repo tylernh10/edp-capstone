@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from "../hooks/AuthContext";
 import City from "./City";
 import './Employee.css';
 import './Search.css'
@@ -10,9 +11,15 @@ import Navigation from "./Navigation";
 const Employee = (props) => {
     
 
+    const auth = useAuth();
+    
     return (
         <div>
             <Navigation />
+
+            Employee Page
+            {auth?.user && <div>{auth.user.username}</div>}
+
             <div className="center-container">
                 <h1 className="title">Tyler Hinrichs <span className="text-muted">(you)</span></h1>
                 <div className="card">

@@ -11,10 +11,15 @@ body, html, #root {
     flex-direction: column;
     height: 100%;
     width: 100%;
+    color: black;
 }
 
 .navigation-links {
-    background-color: rgb(33, 140, 79);
+    background: radial-gradient(circle at 0% 0%, #313d5a, transparent),
+                radial-gradient(circle at 100% 0%, rgb(33, 140, 79), transparent);
+    background-size: 100% 100%; 
+    background-repeat: no-repeat;
+    background-position: top left, top right;
     top: 0;
     width: 100%;
     display: flex;
