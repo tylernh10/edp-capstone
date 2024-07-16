@@ -13,6 +13,7 @@ import Predictor from "./components/Predictor";
 import RequireAuth from './components/RequireAuth'
 import { AuthProvider, useAuth } from './hooks/AuthContext';
 import './App.css'
+import NotFound from "./components/NotFound";
 
 function App() {
   const auth = useAuth();
@@ -27,6 +28,7 @@ function App() {
             <Route path={`/employee/:id`} element={<RequireAuth><Employee /></RequireAuth>} />
             <Route path="/search" element={<RequireAuth><SearchResults /></RequireAuth>} />
             <Route path="/predictor" element={<RequireAuth><Predictor /></RequireAuth>} />
+            <Route path="*" element={<RequireAuth><NotFound /></RequireAuth>} />
           </Routes>
         </Router>
       </AuthProvider>

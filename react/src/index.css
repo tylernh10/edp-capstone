@@ -67,3 +67,11 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.button-link {
+  color: white;
+}
+
+.button-link:hover {
+  color: white;
+}
