@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
                 const userRes = await response.json();
                 if (userRes) {
                     setUser({
-                        username
+                        username,
                         user_id: userRes.user_id
                     });
                     return { success: true, message: 'Login successful', status: response.status };
