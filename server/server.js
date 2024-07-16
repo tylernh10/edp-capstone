@@ -84,7 +84,7 @@ app.post('/enterprise/login', async (req, res) => {
         if (user) {
             console.log(user);
             console.log(user.user_id);
-            res.status(200).send({"uid": user.user_id});
+            res.status(200).send({"user_id": user.user_id});
         } else {
             res.status(401).send({"message": "Invalid login credentials."});
         }

@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useAuth } from "../hooks/AuthContext";
 import City from "./City";
 import './Employee.css';
@@ -9,24 +9,52 @@ import './Search.css'
 import Navigation from "./Navigation";
 
 const Employee = (props) => {
-    
-
     const auth = useAuth();
+    let { employeeId } = useParams();
+    console.log(employeeId);
+    console.log(auth);
     
+    const [userData, setUserData] = useState(null);
+    
+    useEffect(() => {
+        const fetchEmployee = async () => {
+            try {
+                const response = await fetch('http://localhost:3000/enterprise/employee', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ user_id: auth.user.user_id }),
+                });
+                if (response.status == 200) {
+                    const employeeData = await response.json();
+                    if (userData) {
+                        setUserData(employeeData);
+                    }
+                } else {
+                    const errorData = await response.json();
+                    console.error("Error: ", errorData.message || 'Employee not found.');
+                }
+            } catch (error) {
+                console.error("Error: ", error);
+            }
+        };
+        fetchEmployee();
+    }, []);
+
     return (
-        <div>
+        <div className="employee-page">
             <Navigation />
 
-            Employee Page
-            {auth?.user && <div>{auth.user.username}</div>}
-
             <div className="center-container">
-                <h1 className="title">Tyler Hinrichs <span className="text-muted">(you)</span></h1>
+                <h1 className="title">
+                    {auth?.user.user_id == employeeId && <span className="text-muted">(you)</span>}
+                </h1>
                 <div className="card">
                     <h2 className="text-muted">Organization Info</h2>
                     <div className="labeled-info">
                         <div className="text-muted">Role: </div>
-                        <div>Software Engineer</div>
+                        <div>{}</div>
                     </div>
                     <div className="separator"></div>
                     <div className="labeled-info">

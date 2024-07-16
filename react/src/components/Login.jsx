@@ -15,7 +15,6 @@ const Login = () => {
     const auth = useAuth();
 
     const navigate = useNavigate();
-    console.log("LOGIN PAGE TEST" + auth?.user);
     if (auth?.user) {
         navigate("/");
     }
