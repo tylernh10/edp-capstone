@@ -1,0 +1,180 @@
+# Generating JSON data to be uploaded to MongoDB
+import names
+import random
+from uuid import uuid1
+import string
+import math
+import json
+
+USER_OUTPUT_PATH = "users.json"
+EMPLOYEE_OUTPUT_PATH = "employees.json"
+
+EMPLOYEE_NUMS = [1, 1, 3, 5, 10, 20, 50, 100, 1000, 200]
+HR_NUMS = [1, 3, 20, 50]
+
+job_roles = [
+    "Chief Executive Officer",
+    "Chief Technology Officer",
+    "Director of Engineering",
+    "Engineering Manager",
+    "Project Manager",
+    "Technical Lead",
+    "Senior Software Engineer",
+    "Software Engineer",
+    "Junior Developer",
+    "Intern"
+]
+
+hr_job_roles = [
+    "Chief Communications Officer",
+    "HR Director",
+    "HR Associate",
+    "HR Assistant",
+]
+
+# used to give a salary that corresponds to a tech role salary
+hr_job_levels = [1, 2, 6, 8]
+
+work_locations = [
+    "New York City",
+    "San Francisco",
+    "San Jose",
+    "Los Angeles",
+    "San Diego",
+    "Chicago",
+    "Philadelphia",
+    "Dallas",
+    "Houston",
+    "Phoenix",
+    "Hartford"
+]
+
+def get_password(num_chars):
+    characters = string.ascii_letters + string.digits
+    password = ''.join(random.choice(characters) for i in range(num_chars))
+    return password
+
+def get_salary(level, work_location_idx):
+    return math.floor(60000 * ((10 - level) / 2) * (1 + (9 - work_location_idx) / 10))
+
+# Generate random data for users and employees
+# job_roles and work_locations are in sorted ascending order based on seniority and location COL
+# Therefore, we can generate "realistic" salary data corresponding to these factors
+
+def generate_data():
+    users, employees = [], []
+    prev_employees = None
+    for i, num_employees in enumerate(EMPLOYEE_NUMS):
+        # The current job title
+        job_role = job_roles[i]
+        
+        # Used so that we can assign direct reports to employees
+        employees_in_current_job_role = []
+        for j in range(num_employees):
+            first, last = names.get_first_name(), names.get_last_name()
+            phone = f"({random.randint(100, 999)}) {random.randint(100, 999)}-{random.randint(1000, 9999)}"
+            work_location_idx = random.randint(0, len(work_locations) - 1)
+            work_location = work_locations[work_location_idx]
+
+            user_id = str(uuid1())
+            
+            user = {
+                "user_id": user_id,
+                "username": first.lower() + last.lower() + str(random.randint(0, 1000)),
+                "password": get_password(16)
+            }
+            
+            starting_salary = get_salary(i, work_location_idx)
+            employee = {
+                "user_id": user_id,
+                "first_name": first,
+                "last_name": last,
+                "full_name": first + " " + last,
+                "phone_number": phone,
+                "email": first.lower() + last.lower() + "@example.com",
+                "job_role": job_role,
+                "work_location": work_location,
+                "salary": random.randint(starting_salary, starting_salary + 20000),
+                "direct_reports": [],
+                "is_hr": False
+            }
+
+            # using modulo to make sure each employee who is supposed to have a direct report has one
+            if prev_employees:
+                prev_employees[j % EMPLOYEE_NUMS[i - 1]]["direct_reports"].append(user_id)
+                employee["manager"] = prev_employees[j % EMPLOYEE_NUMS[i - 1]]["user_id"]
+
+            employees_in_current_job_role.append(employee)
+            
+            users.append(user)
+        
+        # when we get to the next job role, we can assign direct reports to employees in the previous job role (job roles are in descending order of seniority)
+        if prev_employees:
+            employees += prev_employees
+        prev_employees = employees_in_current_job_role
+    employees += prev_employees
+    
+    prev_employees = [employees[0]]
+    for i, num_employees in enumerate(HR_NUMS):
+        # The current job title
+        job_role = hr_job_roles[i]
+        
+        # Used so that we can assign direct reports to employees
+        employees_in_current_job_role = []
+        for j in range(num_employees):
+            first, last = names.get_first_name(), names.get_last_name()
+            phone = f"({random.randint(100, 999)}) {random.randint(100, 999)}-{random.randint(1000, 9999)}"
+            work_location_idx = random.randint(0, len(work_locations) - 1)
+            work_location = work_locations[work_location_idx]
+
+            user_id = str(uuid1())
+            
+            user = {
+                "user_id": user_id,
+                "username": first.lower() + last.lower() + str(random.randint(0, 1000)),
+                "password": get_password(16)
+            }
+            
+            starting_salary = get_salary(hr_job_levels[i], work_location_idx)
+            employee = {
+                "user_id": user_id,
+                "first_name": first,
+                "last_name": last,
+                "full_name": first + " " + last,
+                "phone_number": phone,
+                "email": first.lower() + last.lower() + "@example.com",
+                "job_role": job_role,
+                "work_location": work_location,
+                "salary": random.randint(starting_salary, starting_salary + 20000),
+                "direct_reports": [],
+                "is_hr": True
+            }
+
+            # using modulo to make sure each employee who is supposed to have a direct report has one
+            if prev_employees:
+                prev_employees[j % HR_NUMS[i - 1]]["direct_reports"].append(user_id)
+                employee["manager"] = prev_employees[j % HR_NUMS[i - 1]]["user_id"]
+            
+            if i == 0:
+                prev_employees = None
+
+            employees_in_current_job_role.append(employee)
+            
+            users.append(user)
+        
+        # when we get to the next job role, we can assign direct reports to employees in the previous job role (job roles are in descending order of seniority)
+        if prev_employees:
+            employees += prev_employees
+        prev_employees = employees_in_current_job_role
+    employees += prev_employees
+    
+    return users, employees
+
+if __name__ == "__main__":
+    users, employees = generate_data()
+
+    with open(USER_OUTPUT_PATH, "w") as f:
+        f.write(json.dumps(users))
+
+    with open(EMPLOYEE_OUTPUT_PATH, "w") as f:
+        f.write(json.dumps(employees))

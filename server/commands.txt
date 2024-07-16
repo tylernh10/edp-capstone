@@ -1,0 +1,8 @@
+Running Server:
+cd server
+npm install
+npm run start
+
+Endpoints:
+/enterprise/employees
+/enterprise/users

@@ -1,0 +1,47 @@
+.text-instructions {
+    color: #7a7676;
+    margin-top: 40px;
+}
+
+.dropdowns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    width: 100%;
+    color: black;
+}
+
+.basic-select {
+    margin-bottom: 10px;
+    width: 50%;
+}
+
+.btn-primary {
+    background-color: rgb(33, 140, 79);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn-primary:hover {
+    background-color: #1c7430;
+}
+
+.predicted-salary {
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: 'Inter';
+    color: black;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.disclaimer {
+    color: #7a7676;
+    padding: 5px;
+}
