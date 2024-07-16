@@ -15,7 +15,7 @@ const Employee = () => {
 
     const [employeeData, setEmployeeData] = useState(null);
     const [managerInfo, setManagerInfo] = useState(null);
-    const [directReports, setDirectReports] = useState([]);
+    const [directReports, setDirectReports] = useState(null);
 
     const fetchEmployee = async (user_id, setState, state = null) => {
         try {
@@ -75,7 +75,7 @@ const Employee = () => {
     useEffect(() => {
         fetchEmployee(id, setEmployeeData);
         setManagerInfo(null);
-        setDirectReports([]);
+        setDirectReports(null);
     }, [id]);
 
     useEffect(() => {
@@ -137,7 +137,7 @@ const Employee = () => {
                 <div>
                     <h2 className="text-muted">Direct Reports</h2>
                     <div className="direct-reports">
-                        {directReports.length > 0 ? (
+                        {directReports && directReports.length > 0 ? (
                             directReports.map((employee, index) => (
                                 <div key={index} className="employee-card">
                                     <Link to={`/employee/${employee.user_id}`}>
@@ -147,8 +147,10 @@ const Employee = () => {
                                     <p>Location: {employee.work_location}</p>
                                 </div>
                             ))
-                        ) : (
+                        ) : directReports && directReports.length == 0 ? (
                             <div className="text-muted">No direct reports found</div>
+                        ) : (
+                            <div className="text-muted">Loading direct reports...</div>
                         )}
                     </div>
                 </div>
