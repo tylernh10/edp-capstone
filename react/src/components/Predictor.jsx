@@ -43,16 +43,29 @@ const Predictor = () => {
     const [predictedSalary, setPredictedSalary] = useState(null);
 
     const handlePrediction = async () => {
-        toast('Disclaimer: Values predicted by the model may not be completely accurate.',
-            {
-                icon: '🌳',
-                style: {
-                    borderRadius: '10px',
-                    background: '#333',
-                    color: '#fff',
-                },
-            }
-        );
+        if (!selectedJobRole || !selectedWorkLocation) {
+            toast('Please fill in all fields!',
+                {
+                    icon: '🌳',
+                    style: {
+                        borderRadius: '10px',
+                        background: '#333',
+                        color: '#fff',
+                    },
+                }
+            );
+        } else {
+            toast('Disclaimer: Values predicted by the model may not be completely accurate.',
+                {
+                    icon: '🌳',
+                    style: {
+                        borderRadius: '10px',
+                        background: '#333',
+                        color: '#fff',
+                    },
+                }
+            );
+        }
         try {
             const response = await fetch('http://localhost:3000/predictor', {
                 method: 'POST',
@@ -79,6 +92,7 @@ const Predictor = () => {
     return (
         <div>
             <Navigation />
+            <div className="text-muted">Please select a job role and work location to predict your salary.</div>
             <div className="dropdowns">
                 <Select
                     name="jobRole"
