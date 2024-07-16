@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 // Creating an authentication context
 const AuthContext = createContext(null);
@@ -8,8 +8,10 @@ const url = 'http://localhost:3000/enterprise/login';
 
 // Auth provider component that wraps your app components
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
-    const [userId, setUserId] = useState('');
+    const [user, setUser] = useState(() => {
+        const storedUser = localStorage.getItem('user');
+        return storedUser ? JSON.parse(storedUser) : null;
+    });
 
     const login = async (username, password) => {
         try {
@@ -21,29 +23,26 @@ export const AuthProvider = ({ children }) => {
                 body: JSON.stringify({ username, password }),
             });
             if (response.status == 200) {
-                const user = await response.json();
-                if (user) {
-                    console.log(user);
-                    setUserId(user.uid);
+                const userRes = await response.json();
+                if (userRes) {
                     setUser({
                         username,
-                        uid: user.uid // Storing the uid returned from the server
+                        uid: userRes.uid
                     });
-                    return { success: true };
+                    return { success: true, message: 'Login successful', status: response.status };
                 }
             } else {
                 const errorData = await response.json();
-                console.log(errorData);
-                return { success: false, message: errorData.message || 'Login failed' };
+                return { success: false, message: errorData.message || 'Login failed', status: response.status };
             }
         } catch (error) {
-            console.error(error);
-            return { success: false, message: 'Login failed' };
+            return { success: false, message: 'Login failed', status: 500 };
         }
     };
 
     const logout = () => {
-        setUser(null); // In real scenarios, you might want to invalidate the session on the server as well
+        setUser(null);
+        localStorage.removeItem('user');
     };
 
     return (

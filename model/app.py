@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import pickle
 import pandas as pd
 
@@ -37,6 +38,7 @@ job_roles.sort()
 work_locations.sort()
 
 app = Flask(__name__)
+CORS(app)
 
 # Load the model from disk
 with open('salary_predictor.pkl', 'rb') as file:
