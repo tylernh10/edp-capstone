@@ -103,6 +103,11 @@ const Employee = () => {
                         <div className="text-muted">Phone: </div>
                         <div>{employeeData ? employeeData.phone_number : "--"}</div>
                     </div>
+                    <div className="separator"></div>
+                    <div className="labeled-info">
+                        <div className="text-muted">Location: </div>
+                        <div>{employeeData ? employeeData.work_location : "--"}</div>
+                    </div>
                 </div>
                 <div>
                     <h2 className="text-muted">Direct Reports</h2>
