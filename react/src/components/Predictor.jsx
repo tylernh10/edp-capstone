@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
+import toast, { Toaster } from 'react-hot-toast'
 
 import Navigation from "./Navigation";
 import City from "./City";
@@ -42,6 +43,16 @@ const Predictor = () => {
     const [predictedSalary, setPredictedSalary] = useState(null);
 
     const handlePrediction = async () => {
+        toast('Disclaimer: Values predicted by the model may not be completely accurate.',
+            {
+                icon: '🌳',
+                style: {
+                    borderRadius: '10px',
+                    background: '#333',
+                    color: '#fff',
+                },
+            }
+        );
         try {
             const response = await fetch('http://localhost:3000/predictor', {
                 method: 'POST',
@@ -66,7 +77,7 @@ const Predictor = () => {
     };
 
     return (
-        <div className="predictor-container">
+        <div>
             <Navigation />
             <div className="dropdowns">
                 <Select
@@ -89,6 +100,7 @@ const Predictor = () => {
             <button className="btn-primary" onClick={handlePrediction}>
                 Predict Salary
             </button>
+            <Toaster />
             <div className="predicted-salary">
                 Predicted Salary: {predictedSalary ? (
                     <span>${new Intl.NumberFormat('en-US').format(predictedSalary)}</span>
@@ -96,9 +108,7 @@ const Predictor = () => {
                     <span></span>
                 )}
             </div>
-            <div>
-                <City />
-            </div>
+            <City />
         </div>
     );
 };

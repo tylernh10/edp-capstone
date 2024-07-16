@@ -10,6 +10,7 @@ import Employee from './components/Employee';
 import SearchResults from './components/SearchResults';
 import Predictor from "./components/Predictor";
 
+import RequireAuth from './components/RequireAuth'
 import { AuthProvider } from './hooks/AuthContext';
 import './App.css'
 
@@ -17,17 +18,20 @@ function App() {
 
   return (
     <>
-      <Router>
-        <AuthProvider>
+      <AuthProvider>
+        <Router>
           <Routes>
-            <Route exact path="/" element={<Login />} />
-            <Route exact path="/enterprise" element={<Home />} />
-            <Route path="/employee" element={<Employee />} />
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/" element={<RequireAuth><Home /></RequireAuth>} />
+            <Route path="/employee" element={<RequireAuth><Employee /></RequireAuth>} />
+            <Route path="/search" element={<RequireAuth><SearchResults /></RequireAuth>} />
+            <Route path="/predictor" element={<RequireAuth><Predictor /></RequireAuth>} />
+            {/* <Route path="/employee" element={<Employee />} />
             <Route path="/search" element={<SearchResults />} />
-            <Route path="/predictor" element={<Predictor />} />
+            <Route path="/predictor" element={<Predictor />} /> */}
           </Routes>
-        </AuthProvider>
-      </Router>
+        </Router>
+      </AuthProvider>
     </>
   )
 }
