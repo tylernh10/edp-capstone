@@ -106,3 +106,8 @@ body {
     width: 100%;
     text-align: center;
 }
+
+.incorrect {
+    font-size: small;
+    color: red;
+}

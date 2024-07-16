@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import Typewriter from 'typewriter-effect';
 
 import { useAuth } from "../hooks/AuthContext";
@@ -9,16 +9,30 @@ import FractalTree from "./FractalTree";
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const { login } = useAuth();
+
+    const [errorMessage, setErrorMessage] = useState(null);
+
+    const auth = useAuth();
+
     const navigate = useNavigate();
+    console.log("LOGIN PAGE TEST" + auth?.user);
+    if (auth?.user) {
+        navigate("/");
+    }
 
     const handleLogin = async (event) => {
         event.preventDefault();
-        const result = await login(username, password);
+        const result = await auth.login(username, password);
         if (result.success) {
-            navigate('/enterprise');
+            navigate('/');
+        } else if (result.status > 400 && result.status < 500) {
+            // Credentials error message
+            setErrorMessage("Error logging in. Check your username and/or password and try again.");
+
+        } else {
+            // Server error message
+            setErrorMessage("Internal server error. Please try again later.");
         }
-        console.log(username, password);
     };
 
     return (
@@ -54,6 +68,7 @@ const Login = () => {
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
                             </div>
+                            {errorMessage && <div className="incorrect">{errorMessage}</div>}
                             <button type="submit" className="btn btn-primary">Login</button>
                         </form>
                     </div>
