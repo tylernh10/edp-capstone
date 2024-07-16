@@ -95,18 +95,22 @@ app.post('/enterprise/login', async (req, res) => {
 });
 
 // POST employee info - specific user_id
-// note two ways to do this: url param or req body
 app.post('/enterprise/employee', async (req, res) => {
-// app.post('/enterprise/employee/:uid', async (req, res) => {
     try {
-        // const userId = req.params.uid;
-        const userId = req.body.uid
+        const userId = req.body.user_id;
+        const loggedInUser = req.body.login_id;
         const client = await MongoClient.connect(url);
         const db = client.db(dbName);
         const emp_collection = db.collection(employeesCollection);
         const employee = await emp_collection.findOne({ "user_id": userId });
-        if (employee) {
-            console.log(employee);
+        const loggedInEmployee = await emp_collection.findOne({ "user_id": loggedInUser });
+
+        if (userId == loggedInUser || loggedInEmployee.is_hr || loggedInUser == employee.manager) {
+            console.log("Show salary.");
+            res.status(200).send(employee);
+        } else if (loggedInUser != employee.manager) {
+            console.log("Not a direct report or HR - hide salary.");
+            delete employee.salary;
             res.status(200).send(employee);
         } else {
             res.status(401).send({"message": "Employee not found."});
