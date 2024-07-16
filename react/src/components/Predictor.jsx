@@ -43,7 +43,7 @@ const Predictor = () => {
 
     const handlePrediction = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/predict', {
+            const response = await fetch('http://localhost:3000/predictor', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

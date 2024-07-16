@@ -10,9 +10,9 @@ import Employee from './components/Employee';
 import SearchResults from './components/SearchResults';
 import Predictor from "./components/Predictor";
 
+import RequireAuth from './components/RequireAuth'
 import { AuthProvider, useAuth } from './hooks/AuthContext';
 import './App.css'
-import RequireAuth from './components/RequireAuth'
 
 function App() {
   const auth = useAuth();

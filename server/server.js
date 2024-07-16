@@ -116,8 +116,8 @@ app.post('/enterprise/employee', async (req, res) => {
 });
 
 app.post('/predictor', async (req, res) => {
-    const role = req.query.job_type;
-    const location = req.query.work_location;
+    const role = req.body.job_type;
+    const location = req.body.work_location;
     console.log(role, location)
 
     try {
@@ -139,7 +139,8 @@ app.post('/predictor', async (req, res) => {
         const data = await response.json();
         res.status(200).json(data);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        console.error("Error: ", err);
+        res.status(500).send({"message": "Something went wrong - predictor."});
     }
 });
 

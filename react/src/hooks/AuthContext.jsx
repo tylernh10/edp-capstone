@@ -13,6 +13,14 @@ export const AuthProvider = ({ children }) => {
         return storedUser ? JSON.parse(storedUser) : null;
     });
 
+    useEffect(() => {
+        if (user) {
+            localStorage.setItem('user', JSON.stringify(user));
+        } else {
+            localStorage.removeItem('user');
+        }
+    }, [user]);
+
     const login = async (username, password) => {
         try {
             const response = await fetch(url, {
@@ -22,11 +30,11 @@ export const AuthProvider = ({ children }) => {
                 },
                 body: JSON.stringify({ username, password }),
             });
-            if (response.status == 200) {
+            if (response.status === 200) {
                 const userRes = await response.json();
                 if (userRes) {
                     setUser({
-                        username,
+                        username
                         user_id: userRes.user_id
                     });
                     return { success: true, message: 'Login successful', status: response.status };
