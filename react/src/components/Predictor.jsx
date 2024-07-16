@@ -92,7 +92,7 @@ const Predictor = () => {
     return (
         <div>
             <Navigation />
-            <div className="text-muted">Please select a job role and work location to predict your salary.</div>
+            <div className="text-instructions">Please select a job role and work location to predict your salary.</div>
             <div className="dropdowns">
                 <Select
                     name="jobRole"
