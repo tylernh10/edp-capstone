@@ -9,8 +9,13 @@ import FractalTree from "./FractalTree";
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
+    const [errorMessage, setErrorMessage] = useState(null);
+
     const auth = useAuth();
+
     const navigate = useNavigate();
+    console.log("LOGIN PAGE TEST" + auth?.user);
     if (auth?.user) {
         navigate("/");
     }
@@ -20,6 +25,13 @@ const Login = () => {
         const result = await auth.login(username, password);
         if (result.success) {
             navigate('/');
+        } else if (result.status > 400 && result.status < 500) {
+            // Credentials error message
+            setErrorMessage("Error logging in. Check your username and/or password and try again.");
+
+        } else {
+            // Server error message
+            setErrorMessage("Internal server error. Please try again later.");
         }
     };
 
@@ -55,6 +67,7 @@ const Login = () => {
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
                             </div>
+                            {errorMessage && <div className="incorrect">{errorMessage}</div>}
                             <button type="submit" className="btn btn-primary">Login</button>
                         </form>
                     </div>

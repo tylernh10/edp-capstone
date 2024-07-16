@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 // Creating an authentication context
 const AuthContext = createContext(null);
@@ -8,8 +8,10 @@ const url = 'http://localhost:3000/enterprise/login';
 
 // Auth provider component that wraps your app components
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
-    const [userId, setUserId] = useState('');
+    const [user, setUser] = useState(() => {
+        const storedUser = localStorage.getItem('user');
+        return storedUser ? JSON.parse(storedUser) : null;
+    });
 
     const login = async (username, password) => {
         try {
@@ -23,27 +25,24 @@ export const AuthProvider = ({ children }) => {
             if (response.status == 200) {
                 const userRes = await response.json();
                 if (userRes) {
-                    setUserId(userRes.uid);
                     setUser({
                         username,
                         uid: userRes.uid
                     });
-                    console.log(user);
-                    return { success: true };
+                    return { success: true, message: 'Login successful', status: response.status };
                 }
             } else {
                 const errorData = await response.json();
-                console.log(errorData);
-                return { success: false, message: errorData.message || 'Login failed' };
+                return { success: false, message: errorData.message || 'Login failed', status: response.status };
             }
         } catch (error) {
-            console.error(error);
-            return { success: false, message: 'Login failed' };
+            return { success: false, message: 'Login failed', status: 500 };
         }
     };
 
     const logout = () => {
         setUser(null);
+        localStorage.removeItem('user');
     };
 
     return (
