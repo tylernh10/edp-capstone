@@ -13,10 +13,10 @@ const Navigation = () => {
             <Link to="/predictor">
                 <div className="nav-link-text">Salary Predictor</div>
             </Link>
-            <Link to="/employee" style={{ marginLeft: 'auto' }}>
+            <Link to={`/employee/${auth?.user.user_id}`} style={{ marginLeft: 'auto' }}>
                 <div className="nav-link-text">Profile</div>
             </Link>
-            <Link to="/employee" onClick={auth?.logout} style={{ margin: 0}}>
+            <Link to="/login" onClick={auth?.logout} style={{ margin: 0}}>
                 <div className="nav-link-text">Logout</div>
             </Link>
         </div>

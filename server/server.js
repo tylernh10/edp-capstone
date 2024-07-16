@@ -84,7 +84,7 @@ app.post('/enterprise/login', async (req, res) => {
         if (user) {
             console.log(user);
             console.log(user.user_id);
-            res.status(200).send({"uid": user.user_id});
+            res.status(200).send({"user_id": user.user_id});
         } else {
             res.status(401).send({"message": "Invalid login credentials."});
         }
@@ -95,16 +95,14 @@ app.post('/enterprise/login', async (req, res) => {
 });
 
 // POST employee info - specific user_id
-// note two ways to do this: url param or req body
 app.post('/enterprise/employee', async (req, res) => {
-// app.post('/enterprise/employee/:uid', async (req, res) => {
     try {
-        // const userId = req.params.uid;
-        const userId = req.body.uid
+        const user_id = req.body.user_id;
+        
         const client = await MongoClient.connect(url);
         const db = client.db(dbName);
         const emp_collection = db.collection(employeesCollection);
-        const employee = await emp_collection.findOne({ "user_id": userId });
+        const employee = await emp_collection.findOne({ "user_id": user_id });
         if (employee) {
             console.log(employee);
             res.status(200).send(employee);

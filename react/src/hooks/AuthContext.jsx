@@ -33,11 +33,10 @@ export const AuthProvider = ({ children }) => {
             if (response.status === 200) {
                 const userRes = await response.json();
                 if (userRes) {
-                    const user = {
-                        username,
-                        uid: userRes.uid,
-                    };
-                    setUser(user);
+                    setUser({
+                        username
+                        user_id: userRes.user_id
+                    });
                     return { success: true, message: 'Login successful', status: response.status };
                 }
             } else {
