@@ -31,7 +31,7 @@ const Employee = () => {
                 if (res) {
                     // only pass in state on the multivalued attribute for direct reports
                     if (state) {
-                        setState([...state, res]);
+                        setState((prevItems) => [...prevItems, res]);
                     } else {
                         setState(res);
                     }
@@ -106,7 +106,7 @@ const Employee = () => {
                 </div>
                 <div>
                     <h2 className="text-muted">Direct Reports</h2>
-                    <div className="center-container direct-reports">
+                    <div className="direct-reports">
                         {directReports.length > 0 ? (
                             directReports.map((employee, index) => (
                                 <div key={index} className="employee-card">
